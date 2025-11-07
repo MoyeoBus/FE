@@ -3,10 +3,9 @@ import splashimg from "../assets/splash.svg";
 
 export default function Splash() {
   const nav = useNavigate();
-
   return (
     // 화면 전체 차지
-    <div className="relative w-full h-dvh bg-[#007CFF]">
+    <div className="mx-auto w-full max-w-sm relative h-dvh bg-[#007CFF]">
       {/* 이미지: 화면 중간쯤 고정 */}
       <img
         src={splashimg}

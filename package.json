@@ -8,15 +8,16 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "sync:android": "npx cap sync android",
     "open:android": "npx cap open android",
     "build:android": "npm run build && npm run sync:android && npm run open:android",
-    "run:android:live": "vite --host --port 5173 & npx cap run android -l --external"
+    "run:android:live": "vite --host --port 5173 & npx cap run android -l --external",
+    "sync:android": "npm run build && npx cap sync android"
   },
   "dependencies": {
     "@capacitor/android": "^7.4.3",
     "@capacitor/core": "^7.4.3",
     "@capacitor/geolocation": "^7.1.5",
+    "axios": "^1.13.2",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.9.5"

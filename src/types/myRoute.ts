@@ -1,4 +1,4 @@
-export type RouteStatus = "CREATED" | "REQUESTED" | "OPERATED";
+export type RouteStatus = "APPROVED" | "CANCELLED" | "PENDING";
 
 export interface RouteItem {
   id: string;
@@ -6,7 +6,8 @@ export interface RouteItem {
   to: string;
   date: string; // YYYY-MM-DD
   time: string; // HH:mm
-  status: RouteStatus;
+  endTime?: string;
+  status?: RouteStatus;
 }
 
 export type RouteStop = {

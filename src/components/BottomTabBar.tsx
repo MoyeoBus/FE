@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import type { ReactNode } from "react";
 import { HomeIcon, HistoryIcon, MyPageIcon } from "../assets/icons";
 
-type Tab = "home" | "myroute" | "mypage" | "history";
+type Tab = "home" | "myroute" | "mypage" | "history" | "notification";
 
 interface Props {
   active: Tab;

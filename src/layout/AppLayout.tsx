@@ -3,9 +3,13 @@ import BottomTabBar from "../components/BottomTabBar";
 
 export default function AppLayout() {
   const location = useLocation();
-  const showTabBar = ["/home", "/myroute", "/mypage", "/history"].some((p) =>
-    location.pathname.startsWith(p)
-  );
+  const showTabBar = [
+    "/home",
+    "/myroute",
+    "/mypage",
+    "/history",
+    "/notification",
+  ].some((p) => location.pathname.startsWith(p));
 
   // 탭바가 있을 때만 하단 패딩을 --tabbar-h 변수로 줘서 이중계산 방지
   return (
@@ -21,5 +25,6 @@ function getActiveTab(pathname: string) {
   if (pathname.startsWith("/myroute")) return "myroute" as const;
   if (pathname.startsWith("/mypage")) return "mypage" as const;
   if (pathname.startsWith("/history")) return "history" as const;
+  if (pathname.startsWith("/notification")) return "notification" as const;
   return "home" as const;
 }

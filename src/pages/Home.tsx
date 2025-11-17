@@ -105,7 +105,7 @@ export default function Home() {
     <div className="w-full h-full flex flex-col font-[Pretendard] bg-white">
       {/* 내부 스크롤 영역 (전체 콘텐츠) */}
       <div className="flex-1 overflow-y-auto">
-        <div className="w-full max-w-sm mx-auto pt-4 pb-[calc(66px+var(--safe-bottom))]">
+        <div className="w-full max-w-sm mx-auto pt-4 pb-[calc(94px+var(--safe-bottom))]">
           <div className="overflow-hidden text-[#111827]">
             {/* 인사말 + 버튼 */}
             <div className="flex items-end justify-between pt-5 pb-3 px-4">

@@ -16,7 +16,7 @@ export default function BottomTabBar({ active }: Props) {
       className="
         fixed bottom-0 left-0 right-0 mx-auto w-full max-w-sm
         bg-white font-[Pretendard]
-        pb-[max(24px,var(--safe-bottom))]
+        pb-[max(24px,var(--safe-bottom))] z-10
       "
       style={
         {

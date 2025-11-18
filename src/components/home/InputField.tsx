@@ -1,7 +1,7 @@
-import date from "../assets/miniCalendar.svg";
-import departure from "../assets/departure.svg";
-import destination from "../assets/destination.svg";
-import timeToStart from "../assets/time.svg";
+import date from "../../assets/miniCalendar.svg";
+import departure from "../../assets/departure.svg";
+import destination from "../../assets/destination.svg";
+import timeToStart from "../../assets/time.svg";
 import type { InputHTMLAttributes } from "react";
 
 type Variant = "date" | "origin" | "destination" | "time";

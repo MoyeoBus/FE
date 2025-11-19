@@ -1,6 +1,10 @@
 import axiosInstance from "./axiosInstance";
 import type { RouteStatus } from "../types/myRoute";
-import type { TrackPointRaw, TrackResponse } from "../types/transports";
+import type {
+  TrackInfo,
+  TrackPointRaw,
+  TrackResponse,
+} from "../types/transports";
 import type { RouteDetailResponse } from "../types/routeDetail";
 
 // 공용 타입
@@ -110,21 +114,6 @@ export const fetchRoutesByPassenger = async (
   return res.data;
 };
 
-// 노선 추적 예시 GET
-export const fetchRouteTrack = async (
-  routeId: number,
-  currentStation: string
-) => {
-  const res = await axiosInstance.get<TrackResponse>(
-    `/transports/${routeId}/track`,
-    {
-      params: { currentStation },
-    }
-  );
-
-  return res.data.result;
-};
-
 export function convertTrackPointsToPath(points: TrackPointRaw[]): LatLng[] {
   return points.map((p) => ({
     // ❗ 서버 lat = lng, lon = lat 이라서 swap
@@ -149,3 +138,27 @@ export const fetchAddresses = async (dosi: string, sigungu: string) => {
 
   return res.data.result ?? [];
 };
+
+// 노선 추적 get
+export async function fetchRouteTrack(
+  routeId: number,
+  currentStation: string
+): Promise<{ info: TrackInfo; path: LatLng[] }> {
+  const res = await axiosInstance.get<TrackResponse>(
+    `/transports/${routeId}/track`,
+    {
+      params: { currentStation },
+    }
+  );
+
+  const { info, points } = res.data.result;
+
+  // 서버 lat = lng, lon = lat 이라서 바꿔줌
+  const path: LatLng[] = points.map((p) => ({
+    lat: p.lon,
+    lng: p.lat,
+  }));
+  console.log(info, path);
+
+  return { info, path };
+}

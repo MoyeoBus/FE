@@ -63,7 +63,7 @@ function item(
       to={to}
       aria-current={isActive ? "page" : undefined}
       className={`
-        flex flex-col items-center justify-center gap-1 flex-1
+        flex flex-col items-center justify-center gap-2 flex-1
         text-[12px] py-2
         ${isActive ? "text-[#212529]" : "text-[#ADB5BD]"}
       `}

@@ -10,10 +10,26 @@ export interface KakaoMapInstance {
   setLevel(level: number): void;
 }
 
+// 추가: Size / Point / MarkerImage 인스턴스 타입
+export interface KakaoSize {
+  getWidth(): number;
+  getHeight(): number;
+}
+
+export interface KakaoPoint {
+  getX(): number;
+  getY(): number;
+}
+
+// MarkerImage 자체는 실제로 메서드 안 쓰니까 빈 인터페이스여도 OK
+export type KakaoMarkerImageInstance = object;
+
 // 마커 인스턴스
 export interface KakaoMarkerInstance {
   setPosition(latlng: KakaoLatLng): void;
   setMap(map: KakaoMapInstance | null): void;
+  // 이미지 마커에서 사용하는 메서드 추가
+  setImage(image: KakaoMarkerImageInstance): void;
 }
 
 // 커스텀 오버레이 인스턴스 (내 위치 마커)
@@ -50,7 +66,6 @@ export interface KakaoServicesNS {
 
 // kakao.maps 네임스페이스
 export interface KakaoMapsNS {
-  // autoload=false 사용 시 필요
   load(callback: () => void): void;
 
   Map: new (
@@ -66,6 +81,7 @@ export interface KakaoMapsNS {
   Marker: new (options: {
     position: KakaoLatLng;
     map?: KakaoMapInstance | null;
+    image?: KakaoMarkerImageInstance;
     zIndex?: number;
   }) => KakaoMarkerInstance;
 
@@ -85,6 +101,17 @@ export interface KakaoMapsNS {
     xAnchor?: number;
     zIndex?: number;
   }) => KakaoCustomOverlayInstance;
+
+  //Size / Point / MarkerImage 생성자
+  Size: new (width: number, height: number) => KakaoSize;
+
+  Point: new (x: number, y: number) => KakaoPoint;
+
+  MarkerImage: new (
+    src: string,
+    size: KakaoSize,
+    options?: { offset?: KakaoPoint }
+  ) => KakaoMarkerImageInstance;
 
   event: {
     addListener(

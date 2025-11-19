@@ -13,7 +13,7 @@ export default function HomeHeader({
   onClickHistory,
 }: Props) {
   return (
-    <div className="flex items-end justify-between pt-5 pb-3 px-4">
+    <div className="flex items-end justify-between pt-4 pb-3 px-4">
       <p className="text-[18px] leading-[150%] font-[500] text-[#212529]">
         안녕하세요, <span className="font-[700]">{address}</span>에서
         <br />
@@ -21,7 +21,7 @@ export default function HomeHeader({
       </p>
       <div className="flex flex-col items-end gap-3">
         <button type="button" onClick={onClickNotification}>
-          <img src={bell} alt="bell" />
+          <img src={bell} alt="bell" className="mr-1" />
         </button>
         <button
           type="button"

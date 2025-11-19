@@ -26,7 +26,7 @@ export default function Login() {
         </div>
 
         {/* 버튼들: 히어로 바로 아래 시작(하단 고정 아님) */}
-        <div className="row-start-3 self-start w-full space-y-2 pt-12 pb-10">
+        <div className="row-start-3 self-start w-full space-y-3 pt-12 pb-10">
           <button
             onClick={() => handleLogin("local")}
             className="w-full h-12 rounded-[10px] bg-[#007CFF] text-white text-[14px] font-normal"

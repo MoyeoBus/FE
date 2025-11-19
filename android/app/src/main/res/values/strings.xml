@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">MoyeoBus</string>
-    <string name="title_activity_main">MoyeoBus</string>
+    <string name="app_name">모여버스</string>
+    <string name="title_activity_main">모여버스</string>
     <string name="package_name">com.moyeobus.app</string>
     <string name="custom_url_scheme">com.moyeobus.app</string>
 </resources>

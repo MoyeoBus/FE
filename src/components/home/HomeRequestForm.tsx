@@ -15,6 +15,8 @@ interface Props {
   stops: AddressItem[];
   loadingStops: boolean;
   stopError: string | null;
+  onSelectOriginStop: (stop: AddressItem) => void;
+  onSelectDestinationStop: (stop: AddressItem) => void;
 }
 
 export default function HomeRequestForm({
@@ -30,6 +32,8 @@ export default function HomeRequestForm({
   stops,
   loadingStops,
   stopError,
+  onSelectOriginStop,
+  onSelectDestinationStop,
 }: Props) {
   const [showOriginDropdown, setShowOriginDropdown] = useState(false);
   const [showDestinationDropdown, setShowDestinationDropdown] = useState(false);
@@ -51,13 +55,16 @@ export default function HomeRequestForm({
     .slice(0, 5);
 
   const handleSelectOrigin = (stop: AddressItem) => {
+    // 인풋 텍스트 세팅
     onChangeOrigin(stop.name);
+    // 선택된 정류장 정보(id 포함) 위로 올리기
+    onSelectOriginStop(stop);
     setShowOriginDropdown(false);
-    // 여기서 선택한 정류장 ID/좌표도 따로 저장 가능
   };
 
   const handleSelectDestination = (stop: AddressItem) => {
     onChangeDestination(stop.name);
+    onSelectDestinationStop(stop);
     setShowDestinationDropdown(false);
   };
 
@@ -148,13 +155,11 @@ export default function HomeRequestForm({
           />
         </div>
 
-        {/* 정류장 에러 표시 */}
         {stopError && <p className="text-xs text-red-500">{stopError}</p>}
 
-        {/* 버튼이 화면 밖으로 안 짤리도록 여유 padding */}
         <button
           type="submit"
-          className="w-full h-12 rounded-[10px] bg-[#007CFF] leading-[150%] text-white text-[14px] font-[500] active:scale-[0.99] transition"
+          className="w-full h-12 rounded-[10px] bg-[#007CFF] leading-[150%] text-white text-[14px] font-[600] active:scale-[0.99] transition"
         >
           노선 요청하기
         </button>

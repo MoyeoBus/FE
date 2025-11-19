@@ -4,7 +4,7 @@ import destination from "../assets/destination.svg";
 import calendar from "../assets/miniCalendar.svg";
 import date from "../assets/time.svg";
 import type { RouteItem, RouteStop, RouteStatus } from "../types/myRoute";
-import { fetchRoutes, type RouteApiItem } from "../apis/routeApi";
+import { fetchRoutes, type RouteApiItem, cancelRoute } from "../apis/routeApi";
 import PageLayout from "../layout/PageLayout";
 
 type LocationState = {
@@ -15,7 +15,6 @@ type LocationState = {
 const mapApiToRouteItem = (item: RouteApiItem): RouteItem => {
   const [startDatePart, startTimePart] = item.startDateTime.split("T");
   const [, endTimePart] = item.endDateTime.split("T");
-
   const startTime = startTimePart?.slice(0, 5) ?? "";
   const endTime = endTimePart?.slice(0, 5) ?? "";
 
@@ -56,12 +55,23 @@ const getStatusLabel = (status: RouteStatus | undefined) => {
   return "취소됨";
 };
 
+// 삭제 상태별 스타일/텍스트
+const getDeleteButtonStyle = (status: RouteStatus | undefined) => {
+  if (status === "PENDING") {
+    return "bg-white border-[#CED4DA] text-[#ADB5BD] active:scale-[0.99]";
+  }
+  if (status === "CANCELLED") {
+    return "bg-[#F1F3F5] border-[#E9ECEF] text-[#ADB5BD] opacity-60 cursor-not-allowed";
+  }
+  return "bg-[#F1F3F5] border-[#E9ECEF] text-[#ADB5BD] opacity-60 cursor-not-allowed";
+};
+
 export default function MyRoute() {
   const navigate = useNavigate();
   const { state } = useLocation() as { state?: LocationState };
-
   const [routeList, setRouteList] = useState<RouteItem[]>([]);
   const [loading, setLoading] = useState(false);
+  const [reloadKey, setReloadKey] = useState(0);
 
   useEffect(() => {
     const loadRoutes = async () => {
@@ -84,12 +94,42 @@ export default function MyRoute() {
     };
 
     loadRoutes();
-  }, [state?.newRoute]);
+  }, [state?.newRoute, reloadKey]);
 
+  // 상세 정보 핸들러
   const handleDetail = (route: RouteItem) => {
     navigate(`/history/${route.id}`, {
       state: { route, stops: makeStops(route) },
     });
+  };
+
+  // 삭제 핸들러
+  const handleCancel = async (route: RouteItem) => {
+    // PENDING 아닐 때는 그냥 막아두기 (안전용)
+    if (route.status !== "PENDING") return;
+
+    const ok = window.confirm("이 노선 요청을 취소하시겠습니까?");
+    if (!ok) return;
+
+    const idNum = Number(route.id);
+    if (Number.isNaN(idNum)) {
+      console.error("route.id를 숫자로 변환할 수 없습니다:", route.id);
+      return;
+    }
+
+    try {
+      const res = await cancelRoute(idNum);
+
+      if (!res.isSuccess) {
+        alert(res.message || "노선 취소에 실패했습니다.");
+        return;
+      }
+      setReloadKey((prev) => prev + 1);
+      setRouteList((prev) => prev.filter((r) => r.id !== route.id));
+    } catch (error) {
+      console.error("노선 취소 실패:", error);
+      alert("노선 취소 요청중 오류가 발생했습니다");
+    }
   };
 
   return (
@@ -159,9 +199,18 @@ export default function MyRoute() {
               </button>
             ) : (
               <div className="mt-3 grid grid-cols-2 gap-2">
-                <button className="h-9 rounded-[8px] border bg-white border-[#CED4DA] font-[600] text-[13px] text-[#ADB5BD]">
+                <button
+                  className={`h-9 rounded-[8px] border font-[600] text-[13px] ${getDeleteButtonStyle(
+                    route.status
+                  )}`}
+                  onClick={() =>
+                    route.status === "PENDING" && handleCancel(route)
+                  }
+                  disabled={route.status !== "PENDING"}
+                >
                   삭제
                 </button>
+
                 <button className="h-9 rounded-[8px] border bg-white border-[#CED4DA] font-[600] text-[13px] text-[#ADB5BD]">
                   다시 요청
                 </button>

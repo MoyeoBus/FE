@@ -2,9 +2,15 @@ type ItemProps = {
   icon: string;
   label: string;
   rightIcon?: string;
+  onClick?: () => void;
 };
 
-export default function MyPageItem({ icon, label, rightIcon }: ItemProps) {
+export default function MyPageItem({
+  icon,
+  label,
+  rightIcon,
+  onClick,
+}: ItemProps) {
   return (
     <button
       className="
@@ -12,6 +18,7 @@ export default function MyPageItem({ icon, label, rightIcon }: ItemProps) {
         px-6 py-4 flex items-center justify-between
         text-left
       "
+      onClick={onClick}
     >
       <div className="flex items-center gap-5">
         <img src={icon} alt="" className="w-[25px] h-[25px]" />

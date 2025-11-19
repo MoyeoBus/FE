@@ -6,9 +6,14 @@ import logoutIcon from "../assets/myLogout.svg";
 import warningIcon from "../assets/myWithdraw.svg";
 import chevronRight from "../assets/myRight.svg";
 import MyPageItem from "../components/MyPageItem";
+import TermsModal from "../components/modal/TermsModal";
+import { useState } from "react";
+import InquiryModal from "../components/modal/InquiryModal";
 
 export default function MyPage() {
-  const userName = "홍길동"; // 유저 정보 받아오기
+  const userName = "손영준"; // 유저 정보 받아오기
+  const [showTerms, setShowTerms] = useState(false);
+  const [showInquiry, setShowInquiry] = useState(false);
 
   return (
     <PageLayout showBack={false} showBell={false}>
@@ -41,16 +46,21 @@ export default function MyPage() {
             icon={questionIcon}
             label="문의하기"
             rightIcon={chevronRight}
+            onClick={() => setShowInquiry(true)}
           />
           <MyPageItem
             icon={docIcon}
             label="이용약관"
             rightIcon={chevronRight}
+            onClick={() => setShowTerms(true)}
           />
           <MyPageItem icon={logoutIcon} label="로그아웃" />
           <MyPageItem icon={warningIcon} label="회원탈퇴" />
         </div>
       </div>
+
+      {showInquiry && <InquiryModal onClose={() => setShowInquiry(false)} />}
+      {showTerms && <TermsModal onClose={() => setShowTerms(false)} />}
     </PageLayout>
   );
 }

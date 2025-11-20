@@ -9,11 +9,17 @@ import MyPageItem from "../components/MyPageItem";
 import TermsModal from "../components/modal/TermsModal";
 import { useState } from "react";
 import InquiryModal from "../components/modal/InquiryModal";
+import { useNavigate } from "react-router-dom";
 
 export default function MyPage() {
   const userName = "손영준"; // 유저 정보 받아오기
+  const navigate = useNavigate();
   const [showTerms, setShowTerms] = useState(false);
   const [showInquiry, setShowInquiry] = useState(false);
+
+  const handleLogout = () => {
+    navigate("/", { replace: true });
+  };
 
   return (
     <PageLayout showBack={false} showBell={false}>
@@ -54,7 +60,11 @@ export default function MyPage() {
             rightIcon={chevronRight}
             onClick={() => setShowTerms(true)}
           />
-          <MyPageItem icon={logoutIcon} label="로그아웃" />
+          <MyPageItem
+            icon={logoutIcon}
+            label="로그아웃"
+            onClick={handleLogout}
+          />
           <MyPageItem icon={warningIcon} label="회원탈퇴" />
         </div>
       </div>

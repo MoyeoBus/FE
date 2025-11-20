@@ -55,6 +55,13 @@ const getStatusLabel = (status: RouteStatus | undefined) => {
   return "취소됨";
 };
 
+const sortByNewestDate = (a: RouteItem, b: RouteItem) => {
+  const dateA = new Date(a.date);
+  const dateB = new Date(b.date);
+
+  return dateB.getTime() - dateA.getTime(); // 최신 날짜가 먼저
+};
+
 // 삭제 상태별 스타일/텍스트
 const getDeleteButtonStyle = (status: RouteStatus | undefined) => {
   if (status === "PENDING") {
@@ -84,6 +91,8 @@ export default function MyRoute() {
           state?.newRoute && { ...state.newRoute },
           ...converted,
         ].filter(Boolean) as RouteItem[];
+
+        merged.sort(sortByNewestDate);
 
         setRouteList(merged);
       } catch (error) {

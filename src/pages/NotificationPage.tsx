@@ -5,17 +5,31 @@ export default function NotificationPage() {
   const dummy = [
     {
       title: "노선 생성 완료",
-      date: "2025-10-31",
-      route: "106번 · 송풍저수지 → 송풍초",
-      location: "웅담면사무소 정류장",
-      time: "14:05",
+      date: "2025-11-17",
+      route: "101번 · 서울특별시청 → 경복궁",
+      location: "서울특별시청",
+      time: "08:00",
     },
     {
       title: "노선 생성 완료",
-      date: "2025-10-30",
-      route: "106번 · 송풍리 마을회관 → 진안고원시장",
-      location: "송풍리 마을회관",
-      time: "14:00",
+      date: "2025-11-11",
+      route: "101번 · 석관동주민센터 → 석관고등학교",
+      location: "석관동주민센터",
+      time: "14:44",
+    },
+    {
+      title: "노선 생성 완료",
+      date: "2025-11-06",
+      route: "101번 · 석계역 → 석관고등학교",
+      location: "석관고등학교",
+      time: "08:00",
+    },
+    {
+      title: "노선 생성 완료",
+      date: "2025-11-06",
+      route: "101번 · 석계역 → 석관고등학교",
+      location: "석계역",
+      time: "14:44",
     },
   ];
   return (

@@ -16,7 +16,8 @@ export default function TermsModal({ onClose }: Props) {
       className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center"
       onClick={handleOverlayClick}
     >
-      <div className="w-[90%] max-w-md bg-white rounded-[12px] p-6 shadow-lg max-h-[60vh] overflow-y-auto">
+      <div className="w-[90%] max-w-md bg-white rounded-[12px] p-6 shadow-lg max-h-[60vh] overflow-y-auto scrollbar-hide">
+        <div className="w-10 h-1.5 bg-gray-300 rounded-full mx-auto mb-4"></div>
         <h2 className="text-[18px] font-[700] mb-3">이용약관</h2>
 
         <div className="text-[13px] text-[#495057] space-y-3 leading-relaxed">

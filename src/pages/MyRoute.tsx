@@ -149,11 +149,13 @@ export default function MyRoute() {
         </span>
       </div>
       {loading && (
-        <p className="text-center text-sm text-gray-400 mt-4">불러오는 중...</p>
+        <p className="text-center text-sm text-gray-400 mt-36">
+          불러오는 중...
+        </p>
       )}
 
       {!loading && routeList.length === 0 && (
-        <p className="text-center text-sm text-gray-400 mt-4">
+        <p className="text-center text-sm text-gray-400 mt-36">
           아직 노선 요청 내역이 없어요.
         </p>
       )}

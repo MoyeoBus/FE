@@ -77,11 +77,7 @@ export const fetchRoutes = async (params: {
   to?: string;
   cursor?: number;
 }) => {
-  const passengerId = 1;
-  const res = await axiosInstance.get<RoutesApiResponse>(
-    `/routes/requests/${passengerId}`,
-    { params }
-  );
+  const res = await axiosInstance.get<RoutesApiResponse>("/routes", { params });
   console.log("노선 조회", res.data);
   return res.data;
 };

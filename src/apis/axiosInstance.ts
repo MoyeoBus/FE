@@ -2,7 +2,7 @@ import axios from "axios";
 import type { AxiosError, AxiosInstance, AxiosRequestConfig } from "axios";
 
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL: "/api/v1",
+  baseURL: "https://api.moyeobus.com/api/v1",
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
@@ -12,7 +12,7 @@ const axiosInstance: AxiosInstance = axios.create({
 //쿠키가 자동으로 요청에 실리도록 설정
 
 const refreshClient = axios.create({
-  baseURL: "/api/v1",
+  baseURL: "https://api.moyeobus.com/api/v1",
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",

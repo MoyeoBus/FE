@@ -7,7 +7,7 @@ type LoginPayload = {
 
 type Provider = "kakao" | "google";
 
-const AUTH_BASE_URL = "http://133.186.143.54:8080";
+const AUTH_BASE_URL = "https://api.moyeobus.com/api/v1";
 
 export async function login(payload: LoginPayload) {
   await axiosInstance.post("/login", payload);

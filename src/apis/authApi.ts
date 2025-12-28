@@ -13,8 +13,7 @@ export async function login(payload: LoginPayload) {
 }
 
 export async function loginOAuth(provider: Provider) {
-  const res = await axiosInstance.post("/login/oauth", {
+  return axiosInstance.post("/login/oauth", null, {
     params: { provider },
   });
-  return res;
 }

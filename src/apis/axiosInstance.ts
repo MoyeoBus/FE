@@ -32,7 +32,7 @@ function processQueue(ok: boolean) {
 // 재발급 끝나면 큐에 있는 요소들 재시도 및 실패처리
 
 async function reissueAccessToken() {
-  await refreshClient.get("/tokens");
+  await refreshClient.post("/tokens");
 }
 // 서버에 토큰 재발급 요청 보냄
 

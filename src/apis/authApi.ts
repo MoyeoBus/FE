@@ -12,8 +12,6 @@ export async function login(payload: LoginPayload) {
   console.log("로그인 성공");
 }
 
-export async function loginOAuth(provider: Provider) {
-  return axiosInstance.post("/login/oauth", null, {
-    params: { provider: provider },
-  });
+export function loginOAuth(provider: Provider) {
+  window.location.href = `https://api.moyeobus.com/oauth2/authorization/${provider}`;
 }

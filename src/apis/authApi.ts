@@ -14,6 +14,6 @@ export async function login(payload: LoginPayload) {
 
 export async function loginOAuth(provider: Provider) {
   return axiosInstance.post("/login/oauth", null, {
-    params: { provider },
+    params: { provider: provider },
   });
 }
